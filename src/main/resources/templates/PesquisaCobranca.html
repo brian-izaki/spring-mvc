@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<head>
+<meta charset="UTF-8">
+<title>Listagem de cobranças</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<div class="card mx-3">
+		<div class="card-header d-flex justify-content-between">
+			<h4>
+				<strong>Pesquisa de cobranças</strong>
+			</h4>
+			<a class="btn btn-link" href="/cobranca/novo">Nova Cobrança</a>
+		</div>
+
+		<div class="card-body">
+			<table class="table table-bordered table-striped text-center">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th class="col-4 text-left">Descrição</th>
+						<th class="col-2">Data de Vencimento</th>
+						<th class="col-2 text-right">Valor</th>
+						<th>Status</th>
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td class="text-left">teste</td>
+						<td>25/01/2000</td>
+						<td class="text-right">56,23</td>
+						<td><span class="badge badge-success px-2 py-1">Recebido</span></td>
+						<td>icone icone</td>
+					</tr>
+
+					<tr>
+						<td colspan="6">Nenhuma cobrança encontrada</td>
+					</tr>
+
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+</section>
+</html>

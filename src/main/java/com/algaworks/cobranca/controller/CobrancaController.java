@@ -24,6 +24,11 @@ public class CobrancaController {
 	
 	// Rotas da aplicação Front-end
 	
+	@RequestMapping(method = RequestMethod.GET)
+	public String pesquisar() {
+		return "PesquisaCobranca";
+	}
+	
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
 		ModelAndView mv = new ModelAndView("CadastroCobranca");

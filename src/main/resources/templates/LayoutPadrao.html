@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- este é um layout padrão, a section com conteudo pode ser alterado com outros conteudos de outros arquivos HTML -->
+<html xmlns:th="https://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+<head>
+<meta charset="UTF-8">
+<title>Cobrança</title>
+<link
+	rel="stylesheet"
+	type="text/css"
+	href="/css/bootstrap.min.css" />
+<link
+	rel="stylesheet"
+	type="text/css"
+	href="/css/style.css" />
+</head>
+<body>
+	<!-- Está sendo dito para inserir o componente Cabecalho aqui -->
+	<header layout:insert="Cabecalho"></header>
+	
+	<!-- irá ser substituido por algum outro conteudo de outros componentes -->
+	<section layout:fragment="conteudo">
+		<p>Conteudo principal</p>
+	</section>
+	
+	<script type="/js/bootstrap.min.js"></script>
+</body>
+</html>
