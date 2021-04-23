@@ -24,26 +24,34 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th class="col-4 text-left">Descrição</th>
-						<th class="col-2">Data de Vencimento</th>
-						<th class="col-2 text-right">Valor</th>
+						<th class="text-left">Descrição</th>
+						<th>Data de Vencimento</th>
+						<th class="text-right">Valor</th>
 						<th>Status</th>
 						<th></th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td class="text-left">teste</td>
-						<td>25/01/2000</td>
-						<td class="text-right">56,23</td>
-						<td><span class="badge badge-success px-2 py-1">Recebido</span></td>
+					<tr th:each="cobranca: ${listaCobranca}">
+						<td th:text="${cobranca.code}"></td>
+						<td class="text-left" th:text="${cobranca.description}"></td>
+						<td th:text="${#dates.format(cobranca.expirationDate, 'dd/MM/yyyy')}"></td>
+						<!-- para concatenar String precisa add | no inicio e final -->
+						<td class="text-right" th:text="|R$ ${{cobranca.value}}|"></td>
+						<td>
+							<span 
+								class="px-2 py-1 badge" 
+								th:text="${cobranca.charge.descricao}"
+								th:classappend="${cobranca.isPendente ? 'badge-danger' : 'badge-success'}"
+							>
+							</span>
+						</td>
 						<td>icone icone</td>
 					</tr>
 
-					<tr>
-						<td colspan="6">Nenhuma cobrança encontrada</td>
+					<tr th:if="${#lists.isEmpty(listaCobranca)}">
+						<td colspan="6" >Nenhuma cobrança encontrada</td>
 					</tr>
 
 				</tbody>
