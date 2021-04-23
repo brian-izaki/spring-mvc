@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de cobrança</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+<body>
+	
+	<nav class="navbar navbar-light bg-dark mb-3">
+		<a class="navbar-brand mt-3" href="#">
+			<img class="logo" alt="AlgaWorks" src="/images/logo-algaworks.png" />
+		</a>
+	</nav>
+	
+	<!-- Está utilizando o thymeleaf para aparecer essa mensagem de confirmação -->
+	<!-- deve reparar no uso de "th:" -->
+	<div class="alert alert-success mx-3" role="alert" th:if="${!#strings.isEmpty(mensagem)}">
+		<!-- Pega a variavel "mensagem" enviada pela controller e adiciona o texto -->
+		<span th:text="${mensagem}"></span>
+	</div>
+	
+	<div class="card mx-3">
+		<div class="card-header">
+			<h4><strong>Nova Cobrança</strong></h4>
+			<a class="flex-align-end">Voltar para a pesquisa</a>
+		</div>
+		
+		<div class="card-body">
+			<form method="POST" action="/cobranca">	
+				
+					
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-labe" for="description">Descrição</label>
+					<div class="col-sm-5">
+						<input class="form-control" id="description" name="description">
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-labe" for="expirationDate ">Data de vencimento</label>
+					<div class="col-sm-2">
+						<input type="date" class="form-control" id="expirationDate" name="expirationDate">
+					</div>
+				</div>   
+				
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-labe" for="value">Valor</label>
+					<div class="col-sm-2">
+						<input class="form-control" id="value" name="value">
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-labe" for="status">Status</label>
+					<div class="col-sm-2">
+						<select id="status" class="custom-select" name="charge">
+							<option 
+								th:each="status: ${todosStatusCharge}" 
+								th:value="${status}"
+								th:text="${status.descricao}" 
+							></option>
+							
+						</select>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-2 offset-md-2">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
+				</div>
+			</form>	
+					
+		</div>
+	</div>
+	
+	<script type="/js/bootstrap.min.js"></script>
+</body>
+</html>

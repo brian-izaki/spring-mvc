@@ -1,0 +1,10 @@
+package com.algaworks.cobranca.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.algaworks.cobranca.model.Cobranca;
+
+// os tipos do JpaRepository é uma entidade e o tipo de dado que é do ID que tem nela
+public interface Cobrancas extends JpaRepository<Cobranca, Long>{
+	
+}
