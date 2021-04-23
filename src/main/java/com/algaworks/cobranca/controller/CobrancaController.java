@@ -18,15 +18,22 @@ import com.algaworks.cobranca.repository.Cobrancas;
 @RequestMapping("/cobranca")
 public class CobrancaController {
 	
-	// ele está pegado da interface criada e instanciando aqui com o autoWired
+	// ele está pegado da interface criada e instanciando no repository com o autoWired
+	// injeção de dependência pelo Framework (ele sai procurando o objeto e encaixa pra mim)
 	@Autowired
 	private Cobrancas cobrancas;
 	
 	// Rotas da aplicação Front-end
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String pesquisar() {
-		return "PesquisaCobranca";
+	public ModelAndView pesquisar() {
+		ModelAndView mv = new ModelAndView("PesquisaCobranca");
+
+		List<Cobranca> todasCobrancas = cobrancas.findAll();
+		
+		mv.addObject("listaCobranca", todasCobrancas);
+		
+		return mv;
 	}
 	
 	@RequestMapping("/novo")
