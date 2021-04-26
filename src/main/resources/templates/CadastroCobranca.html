@@ -41,7 +41,7 @@
 						<input
 							class="form-control"
 							id="description"
-							name="description"
+							th:field="*{description}"
 							th:classappend="${#fields.hasErrors('description')} ? 'is-invalid'">
 					</div>
 				</div>
@@ -55,7 +55,7 @@
 							type="date"
 							class="form-control"
 							id="expirationDate"
-							name="expirationDate"
+							th:field="*{expirationDate}"
 							th:classappend="${#fields.hasErrors('expirationDate')} ? 'is-invalid'">
 					</div>
 				</div>
@@ -68,7 +68,7 @@
 						<input
 							class="form-control"
 							id="value"
-							name="value"
+							th:field="*{value}"
 							th:classappend="${#fields.hasErrors('value')} ? 'is-invalid'">
 					</div>
 				</div>

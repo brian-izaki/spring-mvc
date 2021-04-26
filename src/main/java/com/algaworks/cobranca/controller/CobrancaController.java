@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.algaworks.cobranca.model.Cobranca;
 import com.algaworks.cobranca.model.StatusCharge;
@@ -49,20 +50,16 @@ public class CobrancaController {
 	
 	// quando o cliente acessar a aba "cobranca" e utilizar o método POST na requisição
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView salvar(@Validated Cobranca cobranca, Errors errors) {
-		ModelAndView mv = new ModelAndView("CadastroCobranca");
-		
+	public String salvar(@Validated Cobranca cobranca, Errors errors, RedirectAttributes redirect) {
 		if (errors.hasErrors()) {
-			return mv;
+			return "CadastroCobranca";
 		}
 		
 		cobrancas.save(cobranca);
+		redirect.addFlashAttribute("mensagem", "Cobrança salva com sucesso!");
 		
-		mv.addObject("mensagem", "Cobrança salva com sucesso!");
-		
-		
-		
-		return mv;
+		// faz redirecionamento de página
+		return "redirect:/cobranca/novo";
 	}
 	
 	// no @modelAttribute, eu defino o nome do atributo que será reconhecido pelo thymeleaf

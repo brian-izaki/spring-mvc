@@ -27,7 +27,7 @@
   - é um conjunto de vários frameworks
   - Cada framework possui um foco de especialidade (dados, arquitetura orientada a serviço, web, entre outros)
 
-- Foi utilizado o padrão **MVC (Model View Controller)**. 
+- Padrão **MVC (Model View Controller)**. 
   - A _Controller_ no Spring será o responsável por gerenciar as rotas da aplicação e então enviar a sua respectiva _View_ com dados que deseja do banco de dados ou que receberam algum tratamento com a regra de negócio.
   - a Model fica responsável pelo modelo de dados, que então com as Notations do Spring + Hibernate se tornam tabelas no banco de dados. Além claro, de se ser um Objeto que pode ser instanciado em tempo de execução. Nela vai ter algumas formatações de estilos que o próprio Spring fornece.
 	
@@ -48,12 +48,13 @@
 - **Notations do Spring**
   - `@AutoWired`: serve para fazer injeção de dependencia, ele busca o objeto a ser instanciado dentro do projeto, assim, não tendo a necessidade de fazer uma intanciação dele com o `new`.
 
-- **Thymeleaf**
+- [**Thymeleaf**](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)
   - É uma template engine (auxilia na construção de layout baseada nos dados que receberá da aplicação) 
   - É possível utilizar estruturas de repetição, variaveis, métodos, entre outros.
   - Para utilizar ele é necessário passar `xmlns:th="https://www.thymeleaf.org"` como atributo da tag `<html>`
   - As páginas HTML que utilizam o thymeleaf estão no diretório `src/main/resources/templates` (possuem exemplos de utilização).
   - Existem **fragmentos** de elementos, com eles pode apenas adicionar uma parte de um código sem a necessidade de repetir código HTML.
+  - [Sintaxe de Expressões](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#standard-expression-syntax)
   
 - **Validações**
   - O Spring fornece validações para os dados.
@@ -62,7 +63,7 @@
     ```Java
     @Entity
     class MinhaEntidadeDaModel {
-	    @NotBlank(message = "Descrição é obrigatória")
+		@NotBlank(message = "Descrição é obrigatória")
 		@Size(max = 60, message = "A descrição não pode ter mais de 60 caracteres")
 		private String description;
 		
@@ -86,7 +87,10 @@
   	
   	- O tipo `Errors` vai ser **preenchido de forma automática pelo Spring** e é possível verificar se teve erro com métodos do próprio objeto.
   	- na view, o objeto que vai ser enviado, pode pegar o atributo `message` que vai conter as mensagens de erros (padrão ou customizadas lá na nossa **model**)
-  
+
+- **Classes do Spring**
+  - `RedirectAttributes`: ela auxilia no redirecionamento de página. Ao redirecionar de página, auxilia no envio de dados com o método `addFlashAttribute` que tem a mesma funcionalidade do `addObject` do tipo `ModelAndView`. A diferença é que ao redirecionar para uma página, ela atualiza nesse processo, o que faz os dados enviados com a ModelAndView sejam perdidos no processo. Já com o RedirectAttributtes, ele envia mesmo com a página atualizando.
+
 - **Banco H2**
   - é um Banco de dados em memória, ou seja, não tem a necessidade de instalar um banco de dados relacional.
   - ele apenas armazena os dados enquanto a aplicação está em execução. Quando ela para, os dados são apagados.
