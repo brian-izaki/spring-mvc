@@ -46,7 +46,7 @@
   - as dependências podem ser encontradas no site [maven repository](https://mvnrepository.com/))
 
 - **Notations do Spring**
-  - `@AutoWired`: serve para fazer injeção de dependencia, ele busca o objeto a ser instanciado dentro do projeto, assim, não tendo a necessidade de fazer uma intanciação dele com o `new`.
+  - `@AutoWired`: serve para fazer injeção de dependencia, ele busca o objeto a ser instanciado dentro do projeto, assim, não tendo a necessidade de fazer uma intanciação dele com o `new`. Não é mágica, ele está pegado da interface criada e instanciando no repository com o autoWired
 
 - [**Thymeleaf**](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)
   - É uma template engine (auxilia na construção de layout baseada nos dados que receberá da aplicação) 
@@ -55,7 +55,8 @@
   - As páginas HTML que utilizam o thymeleaf estão no diretório `src/main/resources/templates` (possuem exemplos de utilização).
   - Existem **fragmentos** de elementos, com eles pode apenas adicionar uma parte de um código sem a necessidade de repetir código HTML.
   - [Sintaxe de Expressões](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#standard-expression-syntax)
-  
+  - `@`: usado para montar links. `@{/rota/{var}(var=${valor})}`
+    - no projeto ajudou a criar uma URL dinâmica
 - **Validações**
   - O Spring fornece validações para os dados.
   - É necessário utilizar a dependencia `spring-boot-starter-validation` no pom.xml, pois ele é uma dependencia separada.
@@ -90,6 +91,15 @@
 
 - **Classes do Spring**
   - `RedirectAttributes`: ela auxilia no redirecionamento de página. Ao redirecionar de página, auxilia no envio de dados com o método `addFlashAttribute` que tem a mesma funcionalidade do `addObject` do tipo `ModelAndView`. A diferença é que ao redirecionar para uma página, ela atualiza nesse processo, o que faz os dados enviados com a ModelAndView sejam perdidos no processo. Já com o RedirectAttributtes, ele envia mesmo com a página atualizando.
+
+- **CRUD**
+  - Foi utilizado o JPARepository para realizar as querys na aplicação (Ver o arquivo na package "repository").
+  - Create
+    - utilizado o método `save(Objeto)`, caso o Objeto **não possua um id**.
+  - Read
+    - utilizado o método `findAll()` e `getOne(paramDeBusca)`
+  - Update
+    - utiliado o mesmo método do Create, mas o Objeto **deve possuir um id**.
 
 - **Banco H2**
   - é um Banco de dados em memória, ou seja, não tem a necessidade de instalar um banco de dados relacional.

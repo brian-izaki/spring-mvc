@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,8 +22,9 @@ import com.algaworks.cobranca.repository.Cobrancas;
 @RequestMapping("/cobranca")
 public class CobrancaController {
 	
-	// ele está pegado da interface criada e instanciando no repository com o autoWired
-	// injeção de dependência pelo Framework (ele sai procurando o objeto e encaixa pra mim)
+	// torna a variavel imutável com o final e com static ele pertece à classe e não objeto (instanciação)
+	private static final String CADASTRO_VIEW = "CadastroCobranca";
+	
 	@Autowired
 	private Cobrancas cobrancas;
 	
@@ -41,7 +43,7 @@ public class CobrancaController {
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
-		ModelAndView mv = new ModelAndView("CadastroCobranca");
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject(new Cobranca());
 		//mv.addObject("todosStatusCharge", StatusCharge.values());
 		
@@ -52,7 +54,7 @@ public class CobrancaController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated Cobranca cobranca, Errors errors, RedirectAttributes redirect) {
 		if (errors.hasErrors()) {
-			return "CadastroCobranca";
+			return CADASTRO_VIEW;
 		}
 		
 		cobrancas.save(cobranca);
@@ -60,6 +62,17 @@ public class CobrancaController {
 		
 		// faz redirecionamento de página
 		return "redirect:/cobranca/novo";
+	}
+	
+	// com as chaves eu torno o caminho variavel (bom para passar id de items)
+	@RequestMapping("/{code}")
+	public ModelAndView edicao(@PathVariable Long code) {
+		
+		Cobranca cobranca = cobrancas.getOne(code);
+		
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW); 
+		mv.addObject(cobranca);
+		return mv;
 	}
 	
 	// no @modelAttribute, eu defino o nome do atributo que será reconhecido pelo thymeleaf
