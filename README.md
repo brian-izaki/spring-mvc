@@ -55,6 +55,38 @@
   - As páginas HTML que utilizam o thymeleaf estão no diretório `src/main/resources/templates` (possuem exemplos de utilização).
   - Existem **fragmentos** de elementos, com eles pode apenas adicionar uma parte de um código sem a necessidade de repetir código HTML.
   
+- **Validações**
+  - O Spring fornece validações para os dados.
+  - É necessário utilizar a dependencia `spring-boot-starter-validation` no pom.xml, pois ele é uma dependencia separada.
+  - Para utilizar as validações, é necessário **utilizar Annotations em cada atributo na Model**.
+    ```Java
+    @Entity
+    class MinhaEntidadeDaModel {
+	    @NotBlank(message = "Descrição é obrigatória")
+		@Size(max = 60, message = "A descrição não pode ter mais de 60 caracteres")
+		private String description;
+		
+		// getters e setters
+	} 
+    ```
+    - Note o uso da annotation `@Entity`, ela serve para o Spring reconhecer a classe como entidade, ou seja, ela vai representar uma tablela no Banco de dados.
+    
+  - Existem diferentes validações, como pode ser [visto na documentação](https://javaee.github.io/javaee-spec/javadocs/javax/validation/constraints/package-summary.html).
+  - Para que as validações da model sejam feitas, é necessário passar a Annotation `@Validated` **na frente do parametro**
+  	```Java
+  	public ModelAndView meuMetodo(@Validated MeuObjeto meuObjeto, Errors errors) {
+		ModelAndView mv = new ModelAndView("NomeDaViewHtml");
+		if (errors.hasErrors()) {
+			return mv;
+		}
+		// codigos para persistir dados.
+		return mv;
+	}
+  	```
+  	
+  	- O tipo `Errors` vai ser **preenchido de forma automática pelo Spring** e é possível verificar se teve erro com métodos do próprio objeto.
+  	- na view, o objeto que vai ser enviado, pode pegar o atributo `message` que vai conter as mensagens de erros (padrão ou customizadas lá na nossa **model**)
+  
 - **Banco H2**
   - é um Banco de dados em memória, ou seja, não tem a necessidade de instalar um banco de dados relacional.
   - ele apenas armazena os dados enquanto a aplicação está em execução. Quando ela para, os dados são apagados.

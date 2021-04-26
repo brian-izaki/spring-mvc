@@ -14,16 +14,10 @@
 </head>
 
 <!-- Esta fragmentação irá substituir o fragment do layout base (LayoutPadrao.html) -->
-<section layout:fragment="conteudo">
-	<!-- Está utilizando o thymeleaf para aparecer essa mensagem de confirmação -->
-	<!-- deve reparar no uso de "th:" -->
-	<div
-		class="alert alert-success mx-3"
-		role="alert"
-		th:if="${!#strings.isEmpty(mensagem)}">
-		<!-- Pega a variavel "mensagem" enviada pela controller e adiciona o texto -->
-		<span th:text="${mensagem}"></span>
-	</div>
+<!-- th:object é referente ao objeto que é passado na controller de forma pura. está no método novo() -->
+<section layout:fragment="conteudo" th:object="${cobranca}">
+	
+	<div layout:replace="Mensagem"></div>
 
 	<div class="card mx-3">
 		<div class="card-header d-flex justify-content-between">
@@ -47,7 +41,8 @@
 						<input
 							class="form-control"
 							id="description"
-							name="description">
+							name="description"
+							th:classappend="${#fields.hasErrors('description')} ? 'is-invalid'">
 					</div>
 				</div>
 
@@ -60,7 +55,8 @@
 							type="date"
 							class="form-control"
 							id="expirationDate"
-							name="expirationDate">
+							name="expirationDate"
+							th:classappend="${#fields.hasErrors('expirationDate')} ? 'is-invalid'">
 					</div>
 				</div>
 
@@ -72,7 +68,8 @@
 						<input
 							class="form-control"
 							id="value"
-							name="value">
+							name="value"
+							th:classappend="${#fields.hasErrors('value')} ? 'is-invalid'">
 					</div>
 				</div>
 

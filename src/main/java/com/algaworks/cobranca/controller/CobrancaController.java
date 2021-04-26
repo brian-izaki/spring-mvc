@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,7 +41,7 @@ public class CobrancaController {
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
 		ModelAndView mv = new ModelAndView("CadastroCobranca");
-		
+		mv.addObject(new Cobranca());
 		//mv.addObject("todosStatusCharge", StatusCharge.values());
 		
 		return mv;
@@ -47,11 +49,15 @@ public class CobrancaController {
 	
 	// quando o cliente acessar a aba "cobranca" e utilizar o método POST na requisição
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView salvar(Cobranca cobranca) {
-		// h2 é um banco de dados em memória.
+	public ModelAndView salvar(@Validated Cobranca cobranca, Errors errors) {
+		ModelAndView mv = new ModelAndView("CadastroCobranca");
+		
+		if (errors.hasErrors()) {
+			return mv;
+		}
+		
 		cobrancas.save(cobranca);
 		
-		ModelAndView mv = new ModelAndView("CadastroCobranca");
 		mv.addObject("mensagem", "Cobrança salva com sucesso!");
 		
 		

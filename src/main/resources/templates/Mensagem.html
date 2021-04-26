@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<body>
+	<!-- Está utilizando o thymeleaf para aparecer essa mensagem de confirmação -->
+	<!-- deve reparar no uso de "th:" -->
+	<div
+		class="alert alert-success mx-3"
+		role="alert"
+		th:if="${!#strings.isEmpty(mensagem)}">
+		<!-- Pega a variavel "mensagem" enviada pela controller e adiciona o texto -->
+		<span th:text="${mensagem}"></span>
+	</div>
+
+	<div
+		class="alert alert-danger mx-3"
+		role="alert"
+		th:if="${#fields.hasAnyErrors()}">
+		<!-- Pega a variavel "mensagem" enviada pela controller e adiciona o texto -->
+		<div th:each="detailError: ${#fields.detailedErrors()}">
+			<span th:text="${detailError.message}"></span>
+		</div>
+	</div>
+</body>
+</html>
