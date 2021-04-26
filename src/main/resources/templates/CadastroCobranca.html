@@ -17,7 +17,8 @@
 <!-- th:object é referente ao objeto que é passado na controller de forma pura. está no método novo() -->
 <section layout:fragment="conteudo" th:object="${cobranca}">
 	
-	<div layout:replace="Mensagem"></div>
+	<div layout:replace="MensagemConfirmacao"></div>
+	<div layout:replace="MensagemErro"></div>
 
 	<div class="card mx-3">
 		<div class="card-header d-flex justify-content-between">

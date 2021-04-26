@@ -75,6 +75,15 @@ public class CobrancaController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/{code}", method = RequestMethod.DELETE)
+	public String excluir(@PathVariable Long code, RedirectAttributes attributes) {
+		cobrancas.deleteById(code);
+		
+		attributes.addFlashAttribute("mensagem", "Cobrança excluída com sucesso!");
+		return "redirect:/cobranca";
+		
+	}
+	
 	// no @modelAttribute, eu defino o nome do atributo que será reconhecido pelo thymeleaf
 	// Caso não passe nada, por padrão será o "Nome_do_Objeto + List"
 	@ModelAttribute("todosStatusCharge")
