@@ -37,6 +37,13 @@
   - A _Controller_ no Spring será o responsável por gerenciar as rotas da aplicação e então enviar a sua respectiva _View_ com dados que deseja do banco de dados ou que receberam algum tratamento com a regra de negócio.
   - a Model fica responsável pelo modelo de dados, que então com as Notations do Spring + Hibernate se tornam tabelas no banco de dados. Além claro, de se ser um Objeto que pode ser instanciado em tempo de execução. Nela vai ter algumas formatações de estilos que o próprio Spring fornece.
 	
+- **Camada de serviço**
+  - vai ser responsável por implementar regras de negócios.
+    - Regras de negócio podem ser tratamento de dados, ações que deseja fazer (envio de email, gerar boleto, etc), manipulação com BD, etc.
+  - A controller fica responsável por implementar regras de view (envio de dados prontos para que a view monte o layout)
+  - `@Service`: Anotation para dizer ao Spring que a classe será um serviço.
+    - Com ela será possível utilizar o @AutoWired para fazer uma injeção de dependência quando for instanciar a classe.
+
 - **Framework Action Based**
   - isto é, na camada de Controller - do mvc - ele vai empurrar dados para a camada View, nela será montado o layout com base nesses dados empurrados. 
 

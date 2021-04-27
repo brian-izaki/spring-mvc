@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.algaworks.cobranca.model.Cobranca;
 import com.algaworks.cobranca.model.StatusCharge;
 import com.algaworks.cobranca.repository.Cobrancas;
+import com.algaworks.cobranca.service.CadastroCobrancaService;
 
 @Controller
 @RequestMapping("/cobranca")
@@ -28,6 +28,9 @@ public class CobrancaController {
 	
 	@Autowired
 	private Cobrancas cobrancas;
+	
+	@Autowired
+	private CadastroCobrancaService cadastroCobrancaService;
 	
 	// Rotas da aplicação Front-end
 	
@@ -59,15 +62,15 @@ public class CobrancaController {
 		}
 		
 		try {
-			cobrancas.save(cobranca);
+			cadastroCobrancaService.salvar(cobranca);
 			redirect.addFlashAttribute("mensagem", "Cobrança salva com sucesso!");
 			
 			// faz redirecionamento de página
 			return "redirect:/cobranca/novo";
-		} catch(DataIntegrityViolationException e) {
+		} catch(IllegalArgumentException e) {
 			// o primeiro argumento é o name que foi passasdo no input
 			// foi adicionado uma mensagem de erro para o caso de o dado de data for inválido
-			errors.rejectValue("expirationDate", null, "Formato de data inválido");
+			errors.rejectValue("expirationDate", null, e.getMessage());
 			return CADASTRO_VIEW;
 		}
 	}
@@ -85,7 +88,8 @@ public class CobrancaController {
 	
 	@RequestMapping(value = "/{code}", method = RequestMethod.DELETE)
 	public String excluir(@PathVariable Long code, RedirectAttributes attributes) {
-		cobrancas.deleteById(code);
+		
+		cadastroCobrancaService.excluir(code);
 		
 		attributes.addFlashAttribute("mensagem", "Cobrança excluída com sucesso!");
 		return "redirect:/cobranca";
