@@ -83,7 +83,8 @@
 						<select
 							id="status"
 							class="custom-select"
-							name="charge">
+							name="charge"
+							th:field="*{charge}">
 							<option
 								th:each="status: ${todosStatusCharge}"
 								th:value="${status}"
