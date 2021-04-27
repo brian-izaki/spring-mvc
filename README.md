@@ -96,7 +96,8 @@
 
 - **Classes do Spring**
   - `RedirectAttributes`: ela auxilia no redirecionamento de página. Ao redirecionar de página, auxilia no envio de dados com o método `addFlashAttribute` que tem a mesma funcionalidade do `addObject` do tipo `ModelAndView`. A diferença é que ao redirecionar para uma página, ela atualiza nesse processo, o que faz os dados enviados com a ModelAndView sejam perdidos no processo. Já com o RedirectAttributtes, ele envia mesmo com a página atualizando.
-
+  - Para tratamento de erros: 
+    - **`DataIntegrityViolationException`**: foi utilizado para tratamento de erro do tipo date para o caso de ser uma data inválida.
 - **CRUD**
   - Foi utilizado o JPARepository para realizar as querys na aplicação (Ver o arquivo na package "repository").
   - Create

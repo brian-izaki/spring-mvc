@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -57,11 +58,18 @@ public class CobrancaController {
 			return CADASTRO_VIEW;
 		}
 		
-		cobrancas.save(cobranca);
-		redirect.addFlashAttribute("mensagem", "Cobrança salva com sucesso!");
-		
-		// faz redirecionamento de página
-		return "redirect:/cobranca/novo";
+		try {
+			cobrancas.save(cobranca);
+			redirect.addFlashAttribute("mensagem", "Cobrança salva com sucesso!");
+			
+			// faz redirecionamento de página
+			return "redirect:/cobranca/novo";
+		} catch(DataIntegrityViolationException e) {
+			// o primeiro argumento é o name que foi passasdo no input
+			// foi adicionado uma mensagem de erro para o caso de o dado de data for inválido
+			errors.rejectValue("expirationDate", null, "Formato de data inválido");
+			return CADASTRO_VIEW;
+		}
 	}
 	
 	// com as chaves eu torno o caminho variavel (bom para passar id de items)
