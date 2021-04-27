@@ -21,4 +21,10 @@ $('#confirmacaoExclusaoModal').on('show.bs.modal', function (event) {
 // executa quando a página carregar onLoad
 $(function() {
 	$('[rel="tooltip"]').tooltip();
+	
+	$('.js-currency').maskMoney({
+		decimal: ',',
+		thousands: '.',
+		allowZero: true,
+	})
 })

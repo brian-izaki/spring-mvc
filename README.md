@@ -14,6 +14,7 @@
   - thymeleaf-layout-dialect (para poder reutilizar fragmentos de layout)
   - Bootstrap (ver. 4.6)
   - Jquery
+  - Jquery mask money
 
 ## Requisitos para iniciar projeto
 - Ter o Java instalado e configurado
