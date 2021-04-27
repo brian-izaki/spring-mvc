@@ -2,13 +2,18 @@
 É um projeto do workshop da AlgaWorks chamado iniciando com Spring MVC. Nele será criado uma aplicação Web que vai realizar o CRUD completo para as cobranças que uma pessoa receber. Poderá ser visto o valor, se foi pago e o nome da pessoa/empresa que tem a cobrança pendente.
 
 ## Tecnologias utilizadas
-- Spring Web
-- Thymeleaf (template engine)
+- Back-end:
+  - Spring Web
+  - Spring Data JPA (para realizar comandos de persistencia de dados utilizando Spring Data com Hibernate)
+  - MySQL
+  - Spring Boot DevTools (para agilizar o recarregamento do servidor quando alterar algo)
+  - Maven (para gerenciamento de dependências)
+  
+-Front-end:
+  - Thymeleaf (template engine)
   - thymeleaf-layout-dialect (para poder reutilizar fragmentos de layout)
-- Spring Data JPA (para realizar comandos de persistencia de dados utilizando Spring Data com Hibernate)
-- MySQL
-- Spring Boot DevTools (para agilizar o recarregamento do servidor quando alterar algo)
-- Maven (para gerenciamento de dependências)
+  - Bootstrap (ver. 4.6)
+  - Jquery
 
 ## Requisitos para iniciar projeto
 - Ter o Java instalado e configurado
