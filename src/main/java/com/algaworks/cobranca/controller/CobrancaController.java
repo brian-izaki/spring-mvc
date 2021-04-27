@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -94,6 +95,11 @@ public class CobrancaController {
 		attributes.addFlashAttribute("mensagem", "Cobrança excluída com sucesso!");
 		return "redirect:/cobranca";
 		
+	}
+	
+	@RequestMapping(value = "/{code}/receber", method = RequestMethod.PUT)
+	public @ResponseBody String receber(@PathVariable Long code) {
+		return cadastroCobrancaService.receber(code);	
 	}
 	
 	// no @modelAttribute, eu defino o nome do atributo que será reconhecido pelo thymeleaf

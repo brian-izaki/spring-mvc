@@ -15,6 +15,7 @@
   - Bootstrap (ver. 4.6)
   - Jquery
   - Jquery mask money
+  - AJAX (alterei para usar Fetch)
 
 ## Requisitos para iniciar projeto
 - Ter o Java instalado e configurado
@@ -60,6 +61,7 @@
 
 - **Notations do Spring**
   - `@AutoWired`: serve para fazer injeção de dependencia, ele busca o objeto a ser instanciado dentro do projeto, assim, não tendo a necessidade de fazer uma intanciação dele com o `new`. Não é mágica, ele está pegado da interface criada e instanciando no repository com o autoWired
+  - `@ResponseBody`: fala que o método na controller não quer enviar um Template (View), apenas uma resposta do servidor com dados.
 
 - [**Thymeleaf**](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)
   - É uma template engine (auxilia na construção de layout baseada nos dados que receberá da aplicação) 
@@ -119,7 +121,11 @@
   - é um Banco de dados em memória, ou seja, não tem a necessidade de instalar um banco de dados relacional.
   - ele apenas armazena os dados enquanto a aplicação está em execução. Quando ela para, os dados são apagados.
   - foi utilizado apenas no inicio do projeto para não ter a necessidade de realizar configurações com o banco de dados MySQL.
-  
+
+- **AJAX**
+  - JavaScript quem realiza as requests (não mais os browsers).
+  - o retorno do controller que se diferencia no fluxo. pois ele poderá retornar uma View ou um Objeto (ambos vão passar pelo framework) e será retornado diretamente para o JavaScript e não o browser.
+
 ---
 
 ## Reference
