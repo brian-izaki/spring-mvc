@@ -57,7 +57,10 @@
 						<td class="text-center">
 							<a
 								class="btn btn-link btn-xs"
-								th:href="@{/cobranca/{code}(code=${cobranca.code})}"> 
+								th:href="@{/cobranca/{code}(code=${cobranca.code})}"
+								title="Editar"
+								rel="tooltip"
+								data-placement="top"> 
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="16"
@@ -74,6 +77,9 @@
 								data-toggle="modal" 
 								data-target="#confirmacaoExclusaoModal"
 								th:attr="data-code=${cobranca.code}, data-description=${cobranca.description}"
+								title="Excluir"
+								rel="tooltip"
+								data-placement="top"
 								>
 								
 								<svg 

@@ -17,3 +17,8 @@ $('#confirmacaoExclusaoModal').on('show.bs.modal', function (event) {
 	
 	modal.find('div.modal-body span').html(`<div>Tem certeza que deseja excluir a cobrança: <strong>${descricao}</strong></div>`)
 })
+
+// executa quando a página carregar onLoad
+$(function() {
+	$('[rel="tooltip"]').tooltip();
+})
