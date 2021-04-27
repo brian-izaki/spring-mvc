@@ -7,13 +7,13 @@ $('#confirmacaoExclusaoModal').on('show.bs.modal', function (event) {
 	
 	const modal = $(this);
 	const form = modal.find('form');
-	let action = form.attr('action');
+	let action = form.data('url-base');
 	
-	const regex = /\/\w+/
-	
-	action = action.match(regex)
+	if(!action.endsWith('/')) {
+		action += '/'
+	}
 		
-	form.attr('action', `${action}/${titleCode}`);
+	form.attr('action', `${action}${titleCode}`);
 	
 	modal.find('div.modal-body span').html(`<div>Tem certeza que deseja excluir a cobrança: <strong>${descricao}</strong></div>`)
 })

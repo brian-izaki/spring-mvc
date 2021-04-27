@@ -17,7 +17,7 @@
 	aria-labelledby="staticBackdropLabel" 
 	aria-hidden="true">
 	 <div class="modal-dialog">
-	 	<form action="/cobranca" method="POST" th:method="DELETE">	
+	 	<form th:attr="data-url-base='/cobranca'" method="POST" th:method="DELETE">	
 	 		
 		 	<div class="modal-content">
 		 		<div class="modal-header">
