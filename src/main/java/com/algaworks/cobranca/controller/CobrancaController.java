@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.algaworks.cobranca.model.Cobranca;
 import com.algaworks.cobranca.model.StatusCharge;
 import com.algaworks.cobranca.repository.Cobrancas;
+import com.algaworks.cobranca.repository.filter.CobrancaFilter;
 import com.algaworks.cobranca.service.CadastroCobrancaService;
 
 @Controller
@@ -36,10 +38,10 @@ public class CobrancaController {
 	// Rotas da aplicação Front-end
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView pesquisar() {
+	public ModelAndView pesquisar(@ModelAttribute("filter") CobrancaFilter cobrancaFilter) {
 		ModelAndView mv = new ModelAndView("PesquisaCobranca");
-
-		List<Cobranca> todasCobrancas = cobrancas.findAll();
+		
+		List<Cobranca> todasCobrancas = cadastroCobrancaService.filtrar(cobrancaFilter);
 		
 		mv.addObject("listaCobranca", todasCobrancas);
 		
