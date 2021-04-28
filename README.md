@@ -58,7 +58,14 @@
     - alterar a porta padrão da aplicação.
     - `logging.level.root=DEBUG`: serve para ver no console o debug da parte Front (requisições, respostas) enquanto a aplicação está em execução.
   - as dependências podem ser encontradas no site [maven repository](https://mvnrepository.com/))
-
+  - **Build** para compilar um arquivo `.war`:
+    - Deve ir no arquivo `pom.xml` e ir nas opções de run. 
+    - Deve escolher a opção "build maven ..."
+    - Na caixa de diálogo que aparecer altere o nome, pois ele será o que vai ser mostrado na URL para acessar.
+    - no goals deve digitar `clean package`
+    - vá para o diretório `target`, e atualize ele pois será lá que o `.war` foi gerado.
+    - o `.war` gerado poderá ser colocado no tomcat na pasta que ficam os arquivos de páginas web para serem compiladas.
+  
 - **Notations do Spring**
   - `@AutoWired`: serve para fazer injeção de dependencia, ele busca o objeto a ser instanciado dentro do projeto, assim, não tendo a necessidade de fazer uma intanciação dele com o `new`. Não é mágica, ele está pegado da interface criada e instanciando no repository com o autoWired
   - `@ResponseBody`: fala que o método na controller não quer enviar um Template (View), apenas uma resposta do servidor com dados.

@@ -25,13 +25,13 @@
 			<h4>
 				<strong>Nova Cobrança</strong>
 			</h4>
-			<a class="btn btn-link" href="/cobranca">Voltar para a pesquisa</a>
+			<a class="btn btn-link" th:href="@{/cobranca}">Voltar para a pesquisa</a>
 		</div>
 
 		<div class="card-body">
 			<form
 				method="POST"
-				action="/cobranca">
+				th:action="@{/cobranca}">
 
 				<input type="hidden" th:field="*{code}" />
 				
